@@ -20,32 +20,29 @@ const especialidadDoctorGet = async (req = request, res = response) => {
 
 const especialidadDoctorPost = async(req, res = response) => {    
         
-    const {nombre,dia,mes,anio} = req.body;
+    const {nombre} = req.body;
     
 
     // const especialidadDB = await EspecialidadDoctor.findOne({dia,mes});
 
-    const [hayDia, hayMes] = await Promise.all([
-        EspecialidadDoctor.findOne({mes,dia}),       
-        EspecialidadDoctor.findOne({mes,dia})
-    ]);
+    // const [hayDia, hayMes] = await Promise.all([
+    //     EspecialidadDoctor.findOne({mes,dia}),       
+    //     EspecialidadDoctor.findOne({mes,dia})
+    // ]);
 
-    console.log(hayDia);
-    console.log(hayMes);
+    // console.log(hayDia);
+    // console.log(hayMes);
 
-    if(hayDia && hayMes){
-        return res.status(400).json({
-            msg: `El mes y dia, ya existe`
-        });
-    }
+    // if(hayDia && hayMes){
+    //     return res.status(400).json({
+    //         msg: `El mes y dia, ya existe`
+    //     });
+    // }
 
     
 
     const data = {
-        nombre,
-        dia,
-        mes,
-        anio
+        nombre
     }
 
     const especialidadDoctor = new EspecialidadDoctor(data);

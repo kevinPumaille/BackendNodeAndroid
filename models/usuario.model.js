@@ -9,29 +9,13 @@ const UsuarioSchema = new Schema({
     type: String,
     required: true
   },
-  apellidoPaternoUsuario: {
-    type: String,
-    required: true
-  },
-  apellidoMaternooUsuario: {
-    type: String,
-    required: true
-  },
-  sexoUsuario: {
-    type: String,
-    required: true
-  },
-  fechaNacimientoUsuario: {
+  apellidoUsuario: {
     type: String,
     required: true
   },
   correoUsuario: {
     type: String,
     require:true
-  },
-  telefonoUsuario: {
-    type: String,
-    required: true
   },
   claveUsuario: {
     type: String,

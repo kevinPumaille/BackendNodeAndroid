@@ -1,19 +1,19 @@
 const { Schema, model } = require('mongoose');
 
 const CitaMedicaSchema = new Schema({
-  fecha: {
-    type: String,
-    required: true
-  },
-  doctor: {
+  horasDoctor: {
     type: Schema.Types.ObjectId,
-    ref: 'Doctore',
+    ref: 'HorasDoctore',
     require: true
   },
   usuario: {
     type: Schema.Types.ObjectId,
     ref: 'Usuario',
     require: true
+  },
+  estado: {
+    type: Boolean,
+    default: true
   },
 });
 

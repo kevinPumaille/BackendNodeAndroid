@@ -5,22 +5,10 @@ const EspecialidadDoctorSchema = new Schema({
     type: String,
     required: true
   },
-  mes: {
-    type: String,
-    required: true
-  },
-  dia: {
-    type: String,
-    required: true
-  },
-  anio: {
-    type: String,
-    required: true
-  },
   estado: {
     type: Boolean,
     default: true
-},
+  },  
 });
 
 EspecialidadDoctorSchema.methods.toJSON = function() {

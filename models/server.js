@@ -11,8 +11,12 @@ class Server {
         
         this.usuariosPath = '/api/usuarios';
         this.authPath = '/api/auth';
-        this.categorias = '/api/categorias';
+        //this.categorias = '/api/categorias';
         this.especialidadDoctor = '/api/especialidadDoctor';
+        this.fechaDispoEspec = '/api/fechaDispoEspec';
+        this.doctor = '/api/doctor';
+        this.doctorFechaDispoEspec = '/api/doctorfechaDispoEspec';
+        this.horasDoctor = '/api/horasDoctor'
 
         this.conectarDB();
         //Conectar a base de datos
@@ -44,8 +48,12 @@ class Server {
     routes() {
         this.app.use( this.authPath, require('../routes/auth'));
         this.app.use( this.usuariosPath, require('../routes/usuarios'));
-        this.app.use( this.categorias, require('../routes/categorias'));
+        //this.app.use( this.categorias, require('../routes/categorias'));
         this.app.use( this.especialidadDoctor, require('../routes/especialidadDoctor'));
+        this.app.use( this.fechaDispoEspec, require('../routes/fechaDispoEspec'));
+        this.app.use( this.doctor, require('../routes/doctor'));
+        this.app.use( this.doctorFechaDispoEspec, require('../routes/doctorFechaDispoEspec'));
+        this.app.use( this.horasDoctor, require('../routes/horasDoctor'));
     }
 
     listen() {

@@ -5,32 +5,22 @@ const DoctorSchema = new Schema({
     type: String,
     required: true
   },
-  apellidoPaterno: {
-    type: String,
-    required: true
-  },
-  apellidoMaterno: {
-    type: String,
-    required: true
-  },
-  reseña: {
-    type: String,
-    required: true
-  },
-  universidadEstudio: {
-    type: String,
-    required: true
-  },
-  gradoEstudio: {
-    type: String,
-    required: true
-  },
-  EspecialidadDoctor: {
+  estado: {
+    type: Boolean,
+    default: true
+  },  
+  especialidad: {
     type: Schema.Types.ObjectId,
     ref: 'EspecialidadDoctore',
     require: true
 }
 });
+
+DoctorSchema.methods.toJSON = function() {
+  const { __v, _id,estado ,...doctor  } = this.toObject();
+  doctor.uid = _id;
+  return doctor;
+}
 
 module.exports = model('Doctore', DoctorSchema);
 
