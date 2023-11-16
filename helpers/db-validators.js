@@ -2,6 +2,7 @@ const Role = require('../models/role');
 const Categoria = require('../models/categoria.model');
 const Usuario = require('../models/usuario.model');
 const EspecialidadDoctor = require('../models/especialidadDoctor.model');
+
 const esRoleValido = async(rol = '') => {
 
     const existeRol = await Role.findOne({ rol });

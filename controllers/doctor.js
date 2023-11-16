@@ -7,7 +7,7 @@ const obtenerDoctorList = async (req, res=response) => {
     const {limite=5,desde=0} = req.query;
     const query = {estado:true};
 
-    const [total, categorias] = await Promise.all([
+    const [total, doctores] = await Promise.all([
         Doctor.countDocuments(query),
         Doctor.find(query)
         .populate('especialidad','nombre')
@@ -17,7 +17,7 @@ const obtenerDoctorList = async (req, res=response) => {
 
     res.json({
         total,
-        categorias
+        doctores
     });
 }
 

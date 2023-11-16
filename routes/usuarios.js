@@ -28,7 +28,11 @@ router.put('/:id', [
 
 router.post('/', [
     check('correoUsuario','El correo no es valido').isEmail(),
-    check('rol').custom(esRoleValido),
+    check('dniUsuario','Dni obligatorio'),
+    check('nombreUsuario','Nombre obligatorio'),
+    check('apellidoUsuario','Apellido obligatorio'),
+    check('claveUsuario','Clave obligatoria'),
+    //check('rol').custom(esRoleValido),
     validarCampos
 ] ,usuariosPost );
 

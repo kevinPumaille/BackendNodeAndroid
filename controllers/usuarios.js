@@ -6,7 +6,7 @@ const { validationResult } = require('express-validator');
 const usuariosGet = async (req = request, res = response) => {
 
     //const { q, nombre = 'No name', apikey, page = 1, limit } = req.query;
-    const {limite=5,desde=0} = req.query;
+    const {limite=30,desde=0} = req.query;
     const query = {estado:true};
 
     const [total, usuarios] = await Promise.all([
@@ -40,10 +40,13 @@ const usuariosPost = async(req, res = response) => {
     usuario.claveUsuario = bcryptjs.hashSync(claveUsuario,salt);
 
     //Guardar en BD
+    usuario.rol = "USER_ROLE"
     await usuario.save();
 
     res.json({
-        usuario
+        //usuario
+        msg:'Usuario creado exitosamente',
+        success: true
     });
 }
 
