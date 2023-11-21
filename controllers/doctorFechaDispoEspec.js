@@ -1,5 +1,5 @@
 const { response, request } = require('express');
-const DoctorFechaDispoEspec = require('../models/DoctorFechaDispoEspec.model');
+const DoctorFechaDispoEspec = require('../models/doctorFechaDispoEspec.model');
 const EspecialidadDoctor = require('../models/especialidadDoctor.model');
 const Doctor = require('../models/doctor.model');
 

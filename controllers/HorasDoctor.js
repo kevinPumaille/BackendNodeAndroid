@@ -1,5 +1,5 @@
 const { response, request } = require('express');
-const HorasDoctor = require('../models/HorasDoctor.model');
+const HorasDoctor = require('../models/horasDoctor.model');
 
 const obtenerHoraDoctorList = async(req, res=response) => {
 
