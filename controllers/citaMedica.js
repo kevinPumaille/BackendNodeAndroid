@@ -6,7 +6,7 @@ const obtenerCitaMedicaList = async (req, res=response) => {
     const {limite=5,desde=0} = req.query;
     const query = {estado:true};
 
-    const [total, citaMedica] = await Promise.all([
+    const [total, citasMedicas] = await Promise.all([
         CitaMedica.countDocuments(query),
         CitaMedica.find(query)
 //        .populate('especialidad','nombre')
@@ -16,7 +16,7 @@ const obtenerCitaMedicaList = async (req, res=response) => {
 
     res.json({
         total,
-        citaMedica
+        citasMedicas
     });
 }
 
@@ -28,7 +28,7 @@ const obtenerCitaMedica = async (req, res=response) => {
         usuario: uid
     };
 
-    const [total, citaMedica] = await Promise.all([
+    const [total, citasMedicas] = await Promise.all([
         CitaMedica.countDocuments(query),
         CitaMedica.find(query)
 //        .populate('especialidad','nombre')
@@ -38,7 +38,7 @@ const obtenerCitaMedica = async (req, res=response) => {
 
     res.json({
         total,
-        citaMedica
+        citasMedicas
     });
 }
 
@@ -48,7 +48,7 @@ const crearCitaMedica = async(req, res=response) => {
 
     await citaMedica.save();
 
-    res.status(201).json({
+    return res.status(201).json({
         //usuario
         msg:'Cita Medica creado exitosamente',
         success: true
