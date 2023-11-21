@@ -9,7 +9,6 @@ const obtenerCitaMedicaList = async (req, res=response) => {
     const [total, citasMedicas] = await Promise.all([
         CitaMedica.countDocuments(query),
         CitaMedica.find(query)
-//        .populate('especialidad','nombre')
         .skip(desde)
         .limit(limite)
     ]);

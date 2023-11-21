@@ -1,6 +1,5 @@
 const { response, request } = require('express');
-const FechaDispoEspec = require('../models/fechaDispoEspec.model');
-const Doctor = require('../models/Doctor.model');
+const Doctor = require('../models/doctor.model');
 
 const obtenerDoctorList = async (req, res=response) => {
 
@@ -22,23 +21,6 @@ const obtenerDoctorList = async (req, res=response) => {
 }
 
 const crearDoctor = async(req, res=response) => {
-
-    // const nombre = req.body.nombre.toUpperCase();
-
-    // const categoriaDB = await Categoria.findOne({nombre});
-
-    // if(categoriaDB){
-    //     return res.status(400).json({
-    //         msg: `La categoria ${categoriaDB.nombre}, ya existe`
-    //     });
-    // }
-
-    //const fechaDispoEspec = req.body;
-
-    // const data = {
-    //     nombre,
-    //     usuario: req.usuario._id
-    // }
 
     const doctor = new Doctor(req.body);
 
