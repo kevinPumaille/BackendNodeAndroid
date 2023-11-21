@@ -16,7 +16,8 @@ class Server {
         this.fechaDispoEspec = '/api/fechaDispoEspec';
         this.doctor = '/api/doctor';
         this.doctorFechaDispoEspec = '/api/doctorfechaDispoEspec';
-        this.horasDoctor = '/api/horasDoctor'
+        this.horasDoctor = '/api/horasDoctor';
+        this.citaMedica = '/api/citaMedica';
 
         this.conectarDB();
         //Conectar a base de datos
@@ -54,6 +55,7 @@ class Server {
         this.app.use( this.doctor, require('../routes/doctor'));
         this.app.use( this.doctorFechaDispoEspec, require('../routes/doctorFechaDispoEspec'));
         this.app.use( this.horasDoctor, require('../routes/horasDoctor'));
+        this.app.use( this.citaMedica, require('../routes/citaMedica'));
     }
 
     listen() {

@@ -21,9 +21,31 @@ const HorasDoctorSchema = new Schema({
 });
 
 HorasDoctorSchema.methods.toJSON = function() {
-  const { __v, _id,estado ,...doctor  } = this.toObject();
-  doctor.uid = _id;
-  return doctor;
+  const { __v, _id,estado ,...data  } = this.toObject();
+  data.uid = _id;
+  
+  // data.doctorFechaDiEs = {
+  //   uid: doctorFechaDiEs._id,
+  //   doctor: {
+  //     uid: doctorFechaDiEs.doctor,
+  //     nombre: doctorFechaDiEs.doctor.nombre,
+  //     especialidad: {
+  //       uid: doctorFechaDiEs.doctor.especialidad._id,
+  //       nombre: doctorFechaDiEs.doctor.especialidad.nombre
+  //     }
+  //   },
+  //   fechaDispoEspec: {
+  //     uid: doctorFechaDiEs.fechaDispoEspec._id,
+  //     mes: doctorFechaDiEs.fechaDispoEspec.mes,
+  //     dia: doctorFechaDiEs.fechaDispoEspec.dia,
+  //     anio: doctorFechaDiEs.fechaDispoEspec.anio,
+  //     especialidad: {
+  //       uid: doctorFechaDiEs.fechaDispoEspec.especialidad._id,
+  //       nombre: doctorFechaDiEs.fechaDispoEspec.especialidad.nombre
+  //     }
+  //   }
+  // }
+  return data;
 }
                                  
 module.exports = model('HorasDoctore', HorasDoctorSchema);

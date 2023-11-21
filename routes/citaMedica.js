@@ -6,21 +6,22 @@ const { validarJWT } = require('../middlewares/validar-jwt');
 const { esAdminRole,tieneRole } = require('../middlewares/validar-roles');
 const { check } = require('express-validator');
 const { esRoleValido, emailExiste, existeUsuarioPorId, existeEspecialidadPorId } = require('../helpers/db-validators');
-const { crearHoraDoctor, obtenerHoraDoctorList, obtenerHoraDoctor } = require('../controllers/HorasDoctor');
+const { obtenerCitaMedicaList, crearCitaMedica, obtenerCitaMedica } = require('../controllers/citaMedica');
+
 
 
 const router = Router();
 
-router.get('/', obtenerHoraDoctorList );
+router.get('/', obtenerCitaMedicaList );
 
-router.get('/especifico', obtenerHoraDoctor );
+router.get('/especifico', obtenerCitaMedica );
 
 router.post('/', [
     // validarJWT,
     //check('nombre','El nombre es obligatorio').not().isEmpty(),
     //check('rol').custom(esRoleValido),
     validarCampos
-] ,crearHoraDoctor);
+] ,crearCitaMedica);
 
 
 

@@ -18,8 +18,28 @@ const DoctorFechaDispoEspecSchema = new Schema({
 });
        
 DoctorFechaDispoEspecSchema.methods.toJSON = function() {
-  const { __v, _id,estado ,...resto  } = this.toObject();
+  const { __v, _id,estado,doctor,fechaDispoEspec ,...resto  } = this.toObject();
+
   resto.uid = _id;
+  resto.doctor = {
+    uid: doctor._id,
+    nombre: doctor.nombre,
+    especialidad: {
+      uid: doctor.especialidad._id,
+      nombre: doctor.especialidad.nombre
+    }
+  }
+
+  resto.fechaDispoEspec = {
+    uid: fechaDispoEspec._id,
+    mes: fechaDispoEspec.mes,
+    dia: fechaDispoEspec.dia,
+    anio: fechaDispoEspec.anio,
+    especialidad: {
+      uid: fechaDispoEspec.especialidad._id,
+      nombre: fechaDispoEspec.especialidad.nombre
+    }
+  }
   return resto;
 }
 

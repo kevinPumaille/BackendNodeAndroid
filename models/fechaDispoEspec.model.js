@@ -25,7 +25,13 @@ const FechaDispoEspecSchema = new Schema({
 });
 
 FechaDispoEspecSchema.methods.toJSON = function() {
-  const { __v,estado, ...data} = this.toObject();
+  const { __v,estado,_id,especialidad, ...data} = this.toObject();
+  data.uid = _id;
+  data.especialidad = {
+    uid: especialidad._id,
+    nombre: especialidad.nombre
+  }
+
   return data;
 }
                                  

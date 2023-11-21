@@ -6,27 +6,10 @@ const obtenerHoraDoctorList = async(req, res=response) => {
     const {limite=30,desde=0} = req.query;
     const query = {estado:true};
 
-    // const [total, categorias] = await Promise.all([
-    //     DoctorFechaDispoEspec.countDocuments(query),
-    //     DoctorFechaDispoEspec.find(query)
-    //     .populate('doctor','nombre')
-    //     .populate('fechaDispoEspec','mes dia anio especialidad')
-    //     .skip(desde)
-    //     .limit(limite)
-    // ]);
-
     const [total, horasDoctor] = await Promise.all([
         HorasDoctor.countDocuments(query),
         HorasDoctor.find(query)
-        // .populate('doctor','nombre')
-        // .populate({
-        //     path: 'fechaDispoEspec',
-        //     select: 'mes dia anio',
-        //     populate: {
-        //     path: 'especialidad',
-        //     select: 'nombre descripcion otroCampo'
-        //     }
-        // })
+
         .skip(desde)
         .limit(limite)
     ]);
@@ -37,24 +20,36 @@ const obtenerHoraDoctorList = async(req, res=response) => {
     });
 }
 
+//Busqueda de hora de un doctor
+const obtenerHoraDoctor = async(req, res=response) => {
+
+    //const {doctorFechaDiEs} = req.body;
+
+    const {limite=30,desde=0,uid=""} = req.query;
+    const query = {
+        estado:true,
+        doctorFechaDiEs:uid
+    };
+
+    //const horasDoctor = await HorasDoctor.findOne({ nombre: especialidad });
+
+    const [total, horasDoctor] = await Promise.all([
+        HorasDoctor.countDocuments(query),
+        HorasDoctor.find(query)
+        .skip(desde)
+        .limit(limite)
+    ]);
+
+    //const horas = horasDoctor.filter( hor => hor.doctorFechaDiEs == doctorFechaDiEs);
+    //totalNuevo = horas.length;
+
+    res.json({
+        total,
+        horasDoctor
+    });
+}
+
 const crearHoraDoctor = async(req, res=response) => {
-
-    // const nombre = req.body.nombre.toUpperCase();
-
-    // const categoriaDB = await Categoria.findOne({nombre});
-
-    // if(categoriaDB){
-    //     return res.status(400).json({
-    //         msg: `La categoria ${categoriaDB.nombre}, ya existe`
-    //     });
-    // }
-
-    //const fechaDispoEspec = req.body;
-
-    // const data = {
-    //     nombre,
-    //     usuario: req.usuario._id
-    // }
 
     const horasDoctor = new HorasDoctor(req.body);
 
@@ -65,5 +60,6 @@ const crearHoraDoctor = async(req, res=response) => {
 
 module.exports = {
     obtenerHoraDoctorList,
-    crearHoraDoctor
+    crearHoraDoctor,
+    obtenerHoraDoctor
 }

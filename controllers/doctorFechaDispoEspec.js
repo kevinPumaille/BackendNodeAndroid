@@ -20,7 +20,14 @@ const obtenerDoctorFechaDispoEspecList = async(req, res=response) => {
     const [total, doctorFechaDispoEspec] = await Promise.all([
         DoctorFechaDispoEspec.countDocuments(query),
         DoctorFechaDispoEspec.find(query)
-        .populate('doctor','nombre')
+        .populate({
+            path: 'doctor',
+            select: 'nombre',
+                populate: {
+                path: 'especialidad',
+                select: 'nombre'
+                }
+        })
         .populate({
             path: 'fechaDispoEspec',
             select: 'mes dia anio',
@@ -50,7 +57,7 @@ const obtenerDoctorFechaDispoEspecList = async(req, res=response) => {
         const especialidadQU = await EspecialidadDoctor.findOne({ nombre: especialidadREQ });
     
         if(!especialidadQU){
-            res.status(404).json({ error: 'Especialidad de medicina no encontrada.' });
+            return res.status(404).json({ error: 'Especialidad de medicina no encontrada.' });
         }
     
     
@@ -69,13 +76,23 @@ const obtenerDoctorFechaDispoEspecList = async(req, res=response) => {
                     select: 'nombre'
                     }
             })
+            .populate({
+                path: 'fechaDispoEspec',
+                select: 'mes dia anio',
+                populate: {
+                    path: 'especialidad',
+                    select: 'nombre descripcion'
+                    }
+            })
             .skip(desde)
             .limit(limite);
 
-        const fechas = fechasDis.filter( fechasDispo => fechasDispo.doctor.especialidad.nombre == especialidadREQ & fechasDispo.fechaDispoEspec == fechaDispoEspecREQ);
-      
+        const doctorFechaDispoEspec = fechasDis.filter( fechasDispo => fechasDispo.doctor.especialidad.nombre == especialidadREQ & fechasDispo.fechaDispoEspec._id == fechaDispoEspecREQ);
+        const total = doctorFechaDispoEspec.length;
+
         res.json({
-            fechas,
+            total,
+            doctorFechaDispoEspec,
         });
         
     }
